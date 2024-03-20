@@ -27,9 +27,10 @@ export default function Home() {
     }
     setPrediction(prediction);
 
+    let predictionStatus = prediction.status;
     while (
-      prediction.status !== "succeeded" &&
-      prediction.status !== "failed"
+      predictionStatus !== "succeeded" &&
+      predictionStatus !== "failed"
     ) {
       await sleep(1000);
       const response = await fetch("/api/predictions/" + prediction.id, { cache: 'no-store' });
@@ -40,6 +41,7 @@ export default function Home() {
       }
       console.log({ prediction })
       setPrediction(prediction);
+      predictionStatus = prediction.status;
     }
   };
 
