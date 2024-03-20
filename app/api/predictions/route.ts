@@ -23,6 +23,7 @@ export async function POST(req: Request) {
   });
 
   if (prediction?.error) {
+    console.log('Prediction error detail: ', prediction.error.detail);
     return new Response(
       JSON.stringify({ detail: prediction.error.detail }),
       { status: 500 }
